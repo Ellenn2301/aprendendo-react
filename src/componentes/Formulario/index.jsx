@@ -7,24 +7,25 @@ import './Formulario.css';
 
 // começa declarando uma arrow function
 
-const Formulario = (props) => {
+const Formulario = ({aoReferenciaCadastrada}) => {
 
-    const comidas = [
-        'Hamburguer',
-        'Batata',
-        'Chocolate',
-        'Cerveja',
-        'Lasanha',
-        'Doce de Leite', 
-        'Agua de coco'
-    ]
+    const areas = [
+        'Gestão de Projetos',
+        'UX e Design',
+        'Desenvolvimento',
+        'DevOps',
+        'Data Science',
+        'Mobile',
+        'Inovação e Gestão',
+        'Segurança da Informação',
+        'Cloud Computing',
+        'Redes e Infraestrutura'
+      ] 
 
-
-    const [comida, setComida] = useState('');
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [imagem, setImagem] = useState('');
-    const [cards, setCard] = useState('');
+    const [time, setTime] = useState('');
 
     const aoSalvar = (evento) => {
         evento.preventDefault();
@@ -32,8 +33,9 @@ const Formulario = (props) => {
             nome,
             cargo,
             imagem,
+            time
         }
-        setCard([...cards, novoCard]);
+        aoReferenciaCadastrada(novoCard);
     }
 
     return(
@@ -63,26 +65,15 @@ const Formulario = (props) => {
             />
 
             <ListaSuspensa
-                label = 'Comidas'
-                itens={comidas}
-                valor={comida}
-                aoAlterarCampo={valor => setComida(valor)}
+               label = 'Sua referência trabalha com:'
+               itens={areas}
+               valor={time}
+               aoAlterarCampo={valor => setTime(valor)}
             />
 
             <Botao>Cadastrar</Botao>
 
-            </form>
-
-            <div className='cards-container'>
-                {Array.isArray(cards) && cards.map((card) => (
-                <div key={card.id} className='card'>
-                <p>Nome: {card.nome}</p>
-                <p>Cargo: {card.cargo}</p>
-                <p>Imagem: {card.imagem}</p>
-                </div>
-            
-            ))}
-            </div> 
+            </form> 
                
         </section>
     )
